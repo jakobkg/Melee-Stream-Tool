@@ -78,13 +78,6 @@ function getData(scInfo) {
 		//change the player info character text
 		document.getElementById('p1CharInfo').textContent = p1Character;
 		document.getElementById('p2CharInfo').textContent = p2Character;
-		//sheik is complicated
-		if (p1Skin.includes("Sheik")) {
-			document.getElementById('p1CharInfo').textContent = "Sheik";
-		}
-		if (p2Skin.includes("Sheik")) {
-			document.getElementById('p2CharInfo').textContent = "Sheik";
-		}
 		//fade it in
 		fadeIn("#p1Info", introDelay+.15);
 		fadeIn("#p2Info", introDelay+.15);
@@ -194,17 +187,10 @@ function getData(scInfo) {
 				//move and fade them back
 				charaFadeIn("#charaP1");
 			});
-
-			//change the player info text if the character is different or if changing between Zelda and Sheik
-			if (p1CharacterPrev != p1Character ||
-				(p1CharacterPrev == "Zelda" && p1Skin.includes("Sheik")) ||
-				(p1Character == "Zelda" && p1SkinPrev.includes("Sheik"))) {
+			
+			if (p1CharacterPrev != p1Character) {
 				fadeOut('#p1Info', () => {
 					document.getElementById('p1CharInfo').textContent = p1Character;
-					//sheik is complicated
-					if (p1Skin.includes("Sheik")) {
-						document.getElementById('p1CharInfo').textContent = "Sheik";
-					}
 					fadeIn('#p1Info');
 				});
 			}
@@ -220,14 +206,9 @@ function getData(scInfo) {
 				charaFadeIn("#charaP2");
 			});
 
-			if (p2CharacterPrev != p2Character ||
-				(p2CharacterPrev == "Zelda" && p2Skin.includes("Sheik")) ||
-				(p2Character == "Zelda" && p2SkinPrev.includes("Sheik"))) {
+			if (p2CharacterPrev != p2Character) {
 				fadeOut('#p2Info', () => {
 					document.getElementById('p2CharInfo').textContent = p2Character;
-					if (p2Skin.includes("Sheik")) {
-						document.getElementById('p2CharInfo').textContent = "Sheik";
-					}
 					fadeIn('#p2Info');
 				});
 			}
@@ -322,13 +303,13 @@ function updateColor(pSlotID, color) {
 	pSlotEL.style.color = getHexColor(color);
 
 	switch (color) {
-		case "Red":
+		case "1":
 			pSlotEL.textContent = "P1"; break;
-		case "Blue":
+		case "2":
 			pSlotEL.textContent = "P2"; break;
-		case "Yellow":
+		case "3":
 			pSlotEL.textContent = "P3"; break;
-		case "Green":
+		case "4":
 			pSlotEL.textContent = "P4"; break;
 		case "CPU":
 			pSlotEL.textContent = "CPU"; break;
@@ -339,13 +320,13 @@ function updateColor(pSlotID, color) {
 //color codes here!
 function getHexColor(color) {
 	switch (color) {
-		case "Red":
+		case "1":
 			return "#e54c4c";
-		case "Blue":
+		case "2":
 			return "#4b4ce5";
-		case "Yellow":
+		case "3":
 			return "#ffcb00";
-		case "Green":
+		case "4":
 			return "#00b200";
 		case "CPU":
 			return "#808080";
@@ -581,26 +562,14 @@ async function updateChar(pCharacter, pSkin, color, charID, direction) {
 	let charPos = [0, 0, 1];
 	//now, check if the character or skin exists in the json file we checked earler
 	if (charInfo != "notFound") {
-		if (direction == "Left") { //player 1 positions
-			if (pSkin.includes("Sheik")) {
-				charPos[0] = charInfo.Left.xSheik;
-				charPos[1] = charInfo.Left.ySheik;
-				charPos[2] = charInfo.Left.scaleSheik;
-			} else {
-				charPos[0] = charInfo.Left.x;
-				charPos[1] = charInfo.Left.y;
-				charPos[2] = charInfo.Left.scale;
-			}
+		if (direction == "Left") { //player 1 positions			
+			charPos[0] = charInfo.Left.x;
+			charPos[1] = charInfo.Left.y;
+			charPos[2] = charInfo.Left.scale;
 		} else { //player 2 positions
-			if (pSkin.includes("Sheik")) {
-				charPos[0] = charInfo.Right.xSheik;
-				charPos[1] = charInfo.Right.ySheik;
-				charPos[2] = charInfo.Right.scaleSheik;
-			} else {
-				charPos[0] = charInfo.Right.x;
-				charPos[1] = charInfo.Right.y;
-				charPos[2] = charInfo.Right.scale;
-			}
+			charPos[0] = charInfo.Right.x;
+			charPos[1] = charInfo.Right.y;
+			charPos[2] = charInfo.Right.scale;
 		}
 	} else { //if the character isnt on the database, set positions for the "?" image
 		//this condition is used just to position images well on both sides
