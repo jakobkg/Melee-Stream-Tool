@@ -1,0 +1,20 @@
+{
+    "skinList": [
+        "Default",
+        "Red",
+        "Blue",
+        "Green",
+        "Purple"
+    ],
+    "saga": "Zelda",
+    "Left": {
+        "xSheik": 75,
+        "ySheik": 275,
+        "scaleSheik": 1.6
+    },
+    "Right": {
+        "xSheik": 750,
+        "ySheik": 125,
+        "scaleSheik": 1.3
+    }
+}
