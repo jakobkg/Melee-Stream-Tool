@@ -303,13 +303,13 @@ function updateColor(pSlotID, color) {
 	pSlotEL.style.color = getHexColor(color);
 
 	switch (color) {
-		case "1":
+		case 1:
 			pSlotEL.textContent = "P1"; break;
-		case "2":
+		case 2:
 			pSlotEL.textContent = "P2"; break;
-		case "3":
+		case 3:
 			pSlotEL.textContent = "P3"; break;
-		case "4":
+		case 4:
 			pSlotEL.textContent = "P4"; break;
 		case "CPU":
 			pSlotEL.textContent = "CPU"; break;
@@ -320,13 +320,13 @@ function updateColor(pSlotID, color) {
 //color codes here!
 function getHexColor(color) {
 	switch (color) {
-		case "1":
+		case 1:
 			return "#e54c4c";
-		case "2":
+		case 2:
 			return "#4b4ce5";
-		case "3":
+		case 3:
 			return "#ffcb00";
-		case "4":
+		case 4:
 			return "#00b200";
 		case "CPU":
 			return "#808080";
